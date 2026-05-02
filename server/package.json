@@ -1,0 +1,22 @@
+{
+  "name": "tnb-voice-ledger-server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "sync-aliases": "node src/scripts/syncAliases.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "latest",
+    "cors": "latest",
+    "dayjs": "latest",
+    "discord.js": "^14.18.0",
+    "dotenv": "latest",
+    "express": "latest"
+  }
+}
