@@ -7,6 +7,26 @@ import { createDiscordClient } from "./discordClient.js";
 import { createVoiceStatsRouter } from "./routes/voiceStats.js";
 import { handleVoiceLedgerEvents } from "./voiceEvents.js";
 
+function isAllowedOrigin(origin, allowedOrigins) {
+  if (!origin) {
+    return true;
+  }
+
+  if (allowedOrigins.includes(origin)) {
+    return true;
+  }
+
+  try {
+    const url = new URL(origin);
+    return (
+      url.protocol === "https:" &&
+      (url.hostname === "vercel.app" || url.hostname.endsWith(".vercel.app"))
+    );
+  } catch {
+    return false;
+  }
+}
+
 async function main() {
   let config;
 
@@ -35,12 +55,12 @@ async function main() {
           "http://127.0.0.1:5173",
         ]);
 
-        if (!origin || developmentOrigins.has(origin)) {
+        if (isAllowedOrigin(origin, [...developmentOrigins])) {
           callback(null, true);
           return;
         }
 
-        callback(new Error("Not allowed by CORS"));
+        callback(null, false);
       },
     }),
   );
