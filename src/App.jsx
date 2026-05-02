@@ -57,11 +57,12 @@ function Shell({ children }) {
             <Logo className="h-10 w-10 text-sm" />
             <div><p className="text-sm font-black leading-none text-[#fff8e6]">T&B</p><p className="mt-1 text-[10px] font-bold tracking-[0.18em] text-[#9e9176]">TRUST AND BELIEVE</p></div>
           </button>
-          <nav className="hidden items-center gap-7 text-sm font-semibold text-[#cfc6ad]/80 md:flex">
-            <button onClick={() => navigate("/")} className="hover:text-[#f5d58b]">홈</button>
-            <button onClick={() => navigate("/systems/voice-ledger")} className="font-serif italic text-[#d8b76f] hover:text-[#f5d58b]">디스코드</button>
-            <button onClick={() => navigate("/archive")} className="font-serif italic text-[#d8b76f] hover:text-[#f5d58b]">기록보관소</button>
-            <a href="/#members" className="hover:text-[#f5d58b]">멤버</a>
+          <nav className="hidden items-center gap-2 md:flex">
+            {[["홈", "/"], ["디스코드 운영", "/systems/voice-ledger"], ["기록보관소", "/archive"]].map(([label, href]) => (
+              <button key={href} onClick={() => navigate(href)} className="rounded-full border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-[#f3ead8] transition hover:border-[#d8b76f]/40 hover:bg-[#d8b76f]/10 hover:text-[#f5d58b]">
+                {label}
+              </button>
+            ))}
           </nav>
         </div>
       </header>
